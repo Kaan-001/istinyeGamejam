@@ -10,23 +10,23 @@ public class SpeechCode : MonoBehaviour
 
     public Image speechmanImage;
 
-    public string speechString;
-
     public TMP_Text speechText;
+
     public static SpeechCode SpeechMan;
+
     public void Start()
     {
         SpeechMan = this;
     }
-    public IEnumerator SpeechRoutine(string currentSpeechString /*,Sprite willShow*/) 
+    public IEnumerator SpeechRoutine(string currentSpeechString, Sprite willShow) 
     {
-       // speechmanImage.sprite = willShow;
+        speechmanImage.sprite = willShow;
 
         speechText.text = "";
         
-        SpeechObj.transform.DOLocalMoveY(-425, 1.25f);
+        SpeechObj.transform.DOLocalMoveY(-425, 0.5f);
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
 
         char[] speechChar = currentSpeechString.ToCharArray();
 
@@ -36,10 +36,10 @@ public class SpeechCode : MonoBehaviour
 
             yield return new WaitForSeconds(0.05f);
         }
-       
-        yield return new WaitForSeconds(1.5f);
-
-        SpeechObj.transform.DOLocalMoveY(-900, 1.25f);
+        yield return new WaitForSeconds(0.5f);
+        SpeechObj.transform.DOLocalMoveY(-900, 0.5f);
+      
+        
 
     }
 }
