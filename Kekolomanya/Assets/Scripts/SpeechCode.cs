@@ -10,10 +10,10 @@ public class SpeechCode : MonoBehaviour
 
     public Image speechmanImage;
 
+   
+
     public TMP_Text speechText;
-
     public static SpeechCode SpeechMan;
-
     public void Start()
     {
         SpeechMan = this;
