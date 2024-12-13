@@ -18,9 +18,9 @@ public class SpeechCode : MonoBehaviour
     {
         SpeechMan = this;
     }
-    IEnumerator SpeechRoutine(string currentSpeechString, Sprite willShow) 
+    public IEnumerator SpeechRoutine(string currentSpeechString /*,Sprite willShow*/) 
     {
-        speechmanImage.sprite = willShow;
+       // speechmanImage.sprite = willShow;
 
         speechText.text = "";
         
