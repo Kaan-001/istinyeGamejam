@@ -57,7 +57,7 @@ public class KekoWcScene : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         //Hocanin girdiði kýsým sonra Ýfle kontrol edilir
-        // while(PlayerHealth)
+        // while(PlayerHealth){}
         
         speechMan = "Oglum Hadi Problem çýkarmayýn! Doðru Derslere.";
         
