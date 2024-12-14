@@ -30,7 +30,7 @@ public class SpeechCode : MonoBehaviour
                 break;
 
             case "Player":
-                speechmanImage.transform.DOLocalMoveX(-665, 0);
+                speechmanImage.transform.DOLocalMoveX(-630, 0);
 
                 break;
         }
