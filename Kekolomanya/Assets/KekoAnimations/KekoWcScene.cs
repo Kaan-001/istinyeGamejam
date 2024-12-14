@@ -29,14 +29,14 @@ public class KekoWcScene : MonoBehaviour
         this.gameObject.GetComponent<Animator>().Play("WalkKeko");
         yield return new WaitForSeconds(4.5f);
         this.gameObject.GetComponent<Animator>().Play("IdleKeko");
-        string speechMan = "La TIRREK sen benim biricik Pelinsuyucuguma ne hakla. Ne cürretle yan gözle bakarsýn heaggg!?";
+        string speechMan = "La TIRREK sen benim biricik Pelinsucuðuma hangi cürretle yan gözle bakarsýn Lan .";
         char[] stringsx = speechMan.ToCharArray();
         StartCoroutine(SpeechCode.SpeechMan.SpeechRoutine(speechMan,Keko));
       
 
 
         yield return new WaitForSeconds(stringsx.Length * 0.05f+2.5f);
-        speechMan = "Muhammed abi vallaha ben birsey yapmadim.";
+        speechMan = "Jilet abi vallaha ben bir Sey yapmadim.";
         stringsx = null;
         stringsx = speechMan.ToCharArray();
         StartCoroutine(SpeechCode.SpeechMan.SpeechRoutine(speechMan,Player));
@@ -62,7 +62,16 @@ public class KekoWcScene : MonoBehaviour
         speechMan = "Oglum Hadi Problem çýkarmayýn! Doðru Derslere.";
         
         StartCoroutine(SpeechCode.SpeechMan.SpeechRoutine(speechMan, Hoca));
-        yield return new WaitForSeconds(stringsx.Length * 0.05f + 4);
+        yield return new WaitForSeconds(stringsx.Length * 0.05f + 2.5f);
+
+        
+        speechMan = "Jilet abi vallaha ben bir Sey yapmadim.";
+        stringsx = null;
+        stringsx = speechMan.ToCharArray();
+        StartCoroutine(SpeechCode.SpeechMan.SpeechRoutine(speechMan, Keko));
+
+        yield return new WaitForSeconds(stringsx.Length * 0.05f + 3f);
+
         if (GlobalVolume.profile.TryGet<Vignette>(out Vignette vignette))
         {
             // Burada Vignette'e eriþilmiþ olur. Þimdi intensity'yi deðiþtirebilirsiniz.
