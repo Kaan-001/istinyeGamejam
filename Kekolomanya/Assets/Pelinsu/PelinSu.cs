@@ -9,6 +9,8 @@ public class PelinSu : MonoBehaviour
     public string[] NpcSpeech;
     public Sprite npcSprite, Player;
     public int SpeechNumber;
+    public bool yoldas;
+    
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player")) 
@@ -22,7 +24,10 @@ public class PelinSu : MonoBehaviour
         if (Speech && Input.GetKeyDown(KeyCode.E) && Once) 
         {
             Once = false;
-
+            if (yoldas) 
+            {
+                CameraPosition.FighterCount += 1;
+            }
             StartCoroutine(Chat());
         }
     }
@@ -58,8 +63,8 @@ public class PelinSu : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Speech = true;
-            
+            Speech = false;
+            Ýnteractive.SetActive(false);
         }
     }
 }
