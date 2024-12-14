@@ -228,7 +228,7 @@ public class NPCFighter : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            //enemy.GetComponent<Enemy>()?.TakeDamage(5);
+            enemy.GetComponent<Character>().TakeDamage(100);
             Debug.Log("Hasar verildi");
         }
     }

@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isDashing = false;
     private float dashTimer = 0f;
     private float dashCooldownTimer = 0f;
-
+    private Animator animator;
     // Sprite kontrolü için
     private SpriteRenderer spriteRenderer;
 
@@ -26,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>(); // Sprite Renderer'ı al
+
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -53,30 +55,34 @@ public class PlayerMovement : MonoBehaviour
             // Flip kontrolü
             if (movement.x < 0)
             {
-                spriteRenderer.flipX = true; // Sola bak
-                FlipPunchRange(true); // Punch Range'i de sola döndür
+                FaceDirection(Vector2.left); // Face left
+
             }
             else if (movement.x > 0)
             {
-                spriteRenderer.flipX = false; // Sağa bak
-                FlipPunchRange(false); // Punch Range'i sağa döndür
+                FaceDirection(Vector2.right); // Face left
             }
 
+            animationControl();
             // Animasyon ve efekt kontrolü (isteğe bağlı)
-            if (movement.x != 0 || movement.y != 0)
-            {
-                //particle.Play(); animator.Play("Run");
-            }
-            else if (movement.x == 0 || movement.y == 0)
-            {
-                //animator.Play("idle"); particle.Stop();
-            }
+
 
             // Dash kontrolü
             if (Input.GetKeyDown(KeyCode.Space) && dashCooldownTimer <= 0)
             {
                 StartCoroutine(Dash());
             }
+        }
+    }
+    void animationControl() 
+    {
+        if (movement.x != 0 || movement.y != 0)
+        {
+            animator.Play("walk");
+        }
+        else
+        {
+            animator.Play("Idle");
         }
     }
 
@@ -94,14 +100,18 @@ public class PlayerMovement : MonoBehaviour
         yield return null;
     }
 
-    // Punch Range'i döndür
-    void FlipPunchRange(bool isFlipped)
+    void FaceDirection(Vector2 direction)
     {
-        if (punchRangeTransform != null)
+        // Yönü değiştirmek için rotayı ayarla
+        if (direction == Vector2.right)
         {
-            Vector3 localScale = punchRangeTransform.localScale;
-            localScale.x = isFlipped ? -Mathf.Abs(localScale.x) : Mathf.Abs(localScale.x);
-            punchRangeTransform.localScale = localScale;
+            // Sağ yönü göster
+            transform.rotation = Quaternion.Euler(0, 0, 0); // Yalnızca X-Y düzleminde döndürme
         }
+        else if (direction == Vector2.left)
+        {
+            // Sol yönü göster
+            transform.rotation = Quaternion.Euler(0, 180, 0); // 180 derece döndür
+        }
     }
 }
