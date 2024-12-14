@@ -15,6 +15,14 @@ public class NPCFighter : MonoBehaviour
     public float moveSpeed = 3f; // Hareket hızı
     public float attackRange = 0.2f; // Saldırı menzili
 
+    //Min and Max Konrdinatlar
+    public float minX = -7f; // Minimum x koordinatı
+    public float maxX = 7f;  // Maksimum x koordinatı
+    public float minY = -3f;  // Minimum y koordinatı
+    public float maxY = 1.50f;   // Maksimum y koordinatı
+   
+
+
     void Start()
     {
         // Karakter bileşenini al
@@ -113,18 +121,78 @@ public class NPCFighter : MonoBehaviour
         int Wow = UnityEngine.Random.Range(0, 3);
         switch (Wow)
         {
-        case 0:         break;
-        case 1:         break;
-        case 2:         break;
+        case 0:
+                while (Vector2.Distance(transform.position, currentGoTarget.position) > 0.1f)
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, currentGoTarget.position, moveSpeed * Time.deltaTime);
+                    yield return null;
+                }
+                yield return new WaitForSeconds(1f);
+                AttackToEnemy();
+
+                
+
+                break;
+        case 1:
+                while (Vector2.Distance(transform.position, currentGoTarget.position) > 0.1f)
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, currentGoTarget.position, moveSpeed * Time.deltaTime);
+                    yield return null;
+                }
+                yield return new WaitForSeconds(1f);
+                AttackToEnemy();
+
+                
+                break;
+        case 2: Vector2 Pos = SetRandomTargetPosition(); 
+                
+                while (Vector2.Distance(transform.position, Pos) > 0.1f)
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, Pos, moveSpeed * Time.deltaTime);
+                    yield return null;
+                }
+                yield return new WaitForSeconds(2f);
+                ChoosingEnemy();
+                break;
         }
+        
         // ara sıra Vuracak Ara sıra kacacak
-        yield return new WaitForSeconds(2f);
+        
     }
 
-  
-    
+    public Vector2 SetRandomTargetPosition()
+    {
+        // Rastgele bir hedef pozisyon seç
+        float randomX = UnityEngine.Random.Range(minX, maxX);
+        float randomY = UnityEngine.Random.Range(minY, maxY);
+        return new Vector2(randomX, randomY);
+    }
 
-    // Yumruğun menzilini görsel olarak göstermek için
+    void AttackToEnemy()
+    {
+       
+            StartCoroutine(Punching());
+        
+    }
+
+    IEnumerator Punching()
+    {
+        Punch();
+        yield return new WaitForSeconds(1.5f); // Yumruk animasyon süresi kadar bekle
+        ChoosingEnemy();
+    }
+
+    void Punch()
+    {
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, attackRange, Which);
+
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            //enemy.GetComponent<Enemy>()?.TakeDamage(5);
+            Debug.Log("Hasar verildi");
+        }
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
