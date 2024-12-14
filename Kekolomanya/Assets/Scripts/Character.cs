@@ -13,7 +13,7 @@ public class Character : MonoBehaviour
     public Team team; // Karakterin takımı
     public int health = 100; // Sağlık değeri
     public bool dead=false;
-    public void TakeDamage(int damage, GameObject Focus)
+    public void TakeDamage(int damage)
     {
         health -= damage;
        

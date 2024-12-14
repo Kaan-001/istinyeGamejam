@@ -26,19 +26,22 @@ public class PlayerPunch : MonoBehaviour
         //}
 
         // Yumruğun isabet ettiği hedefleri kontrol et
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, punchRange, enemyLayer);
+        Vector2 punchPosition = transform.position + transform.right * 1f;
+
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(punchPosition, punchRange, enemyLayer);
 
         foreach (Collider2D enemy in hitEnemies)
         {
             // Düşmanlara hasar ver
-            enemy.GetComponent<Enemy>().TakeDamage(punchDamage,this.gameObject);
+            enemy.GetComponent<Character>().TakeDamage(100);
         }
     }
 
     // Yumruğun menzilini görsel olarak göstermek için
     private void OnDrawGizmosSelected()
     {
+        Vector2 punchPosition = transform.position + transform.right * 1f;
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, punchRange);
+        Gizmos.DrawWireSphere(punchPosition, punchRange);
     }
 }
