@@ -1,157 +1,133 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using DG.Tweening;
 public class NPCFighter : MonoBehaviour
 {
- 
+    public LayerMask Which; // Saldırı yapabileceği katman
     private Character character;
-    public GameObject[] Enemys;
-    public List<GameObject> enemies;
-    public GameObject currentTarget;
-    public Transform currentGoTarget;
-    public bool isAttacking, OncePunch;
-    // bütün oyuncuları buluyor 
+    public GameObject[] Enemys; // Tüm düşmanlar
+    public List<GameObject> enemies = new List<GameObject>(); // Filtrelenmiş düşmanlar
+    public GameObject currentTarget; // Şu anki hedef
+    public Transform currentGoTarget; // Hedefin yakın child'ı
+    public bool isAttacking = false, OncePunch = true,RandomWhere=false;
+    public float moveSpeed = 3f; // Hareket hızı
+    public float attackRange = 0.2f; // Saldırı menzili
+
     void Start()
     {
+        // Karakter bileşenini al
         character = GetComponent<Character>();
-        
+
+        // Tüm düşmanları bul ve filtrele
         Enemys = GameObject.FindGameObjectsWithTag("Fighter");
 
-        for (int i = 0; i < Enemys.Length; i++)
+        foreach (var enemy in Enemys)
         {
-          
-            if (!enemies.Contains(Enemys[i]) && character.team != Enemys[i].GetComponent<Character>().team) 
+            // Aynı takımda olmayan düşmanları listeye ekle
+            if (character.team != enemy.GetComponent<Character>().team)
             {
-                enemies.Add(Enemys[i]);
+                enemies.Add(enemy);
             }
         }
-        ChoosingEnemy();
 
+        ChoosingEnemy();
     }
+   
     public void ChoosingEnemy()
     {
+        // Ölü düşmanları listeden çıkar
+        enemies.RemoveAll(enemy => enemy == null || enemy.GetComponent<Character>().dead);
         int randomChooseNum = UnityEngine.Random.Range(0, enemies.Count);
-
-        if (enemies.Count > 0 && enemies[randomChooseNum].GetComponent<Character>().canSelectable ) 
+        // Eğer düşman listesi boşsa işlem yapılmaz
+        if (enemies.Count == 0)
         {
-            enemies[randomChooseNum].GetComponent<Character>().canSelectable = true;
-
-            currentTarget = enemies[randomChooseNum]; 
+            Debug.LogWarning("Düşman listesi boş!");
+            return;
         }
-
-        if(currentTarget!=null) GoToEnemy();
+        if (enemies.Count > 0 && enemies.Contains(enemies[randomChooseNum]))
+        {
+            currentTarget = enemies[randomChooseNum];
+        }
+        // En yakın düşmanı seç
        
-    }
-    void GoToEnemy() 
-    {
-        if (this.transform.position.x-currentTarget.transform.position.x < 0) 
+
+        if (currentTarget != null)
         {
-            SelectClosestChild();
-        //düşmanım sağda
+            GoToEnemy();
         }
-        else 
-        {
-            //düşmanım solda
-            SelectClosestChild();
-        }
-        // current targetin 2 childindan en yakın olan child seçilir ve o child a gidilir
     }
 
-    // 1. En yakın child'ı seç
-    void SelectClosestChild()
+    GameObject GetClosestEnemy()
     {
-        // Eğer currentTarget atanmadıysa hata ver ve işlemi durdur
+        float minDistance = Mathf.Infinity;
+        GameObject closestEnemy = null;
+
+        foreach (var enemy in enemies)
+        {
+            float distance = Vector3.Distance(transform.position, enemy.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closestEnemy = enemy;
+            }
+        }
+
+        return closestEnemy;
+    }
+
+    void GoToEnemy()
+    {
         if (currentTarget == null)
         {
-            Debug.LogWarning("currentTarget atanmadı!");
+            Debug.LogWarning("Geçerli bir hedef yok!");
             return;
         }
 
-        // currentTarget'ın child sayısını kontrol et
-        if (currentTarget.transform.childCount < 2)
+        // En yakın child'ı seç
+        SelectClosestChild();
+    }
+
+    void SelectClosestChild()
+    {
+        if (currentTarget == null || currentTarget.transform.childCount < 2)
         {
-            Debug.LogWarning("currentTarget'ın yeterli sayıda child'ı yok!");
+            Debug.LogWarning("Hedef geçerli değil veya yeterli child yok!");
             return;
         }
 
-        // Child'lara erişim
+        // İki child'ın mesafesini hesapla ve en yakınını seç
         Transform child1 = currentTarget.transform.GetChild(0);
         Transform child2 = currentTarget.transform.GetChild(1);
 
-        // Mesafeleri hesapla
-        float distanceToChild1 = Vector2.Distance(transform.position, child1.position);
-        float distanceToChild2 = Vector2.Distance(transform.position, child2.position);
+        float distanceToChild1 = Vector3.Distance(transform.position, child1.position);
+        float distanceToChild2 = Vector3.Distance(transform.position, child2.position);
 
-        // En yakın olan child'ı seç
         currentGoTarget = distanceToChild1 < distanceToChild2 ? child1 : child2;
-
-       
+        StartCoroutine(GoCurrentTarget());
     }
-    void MoveAndAttack()
-    {
 
-        // Pozisyona hareket
-        if (!isAttacking) 
+    public IEnumerator GoCurrentTarget() 
+    {
+        int Wow = UnityEngine.Random.Range(0, 3);
+        switch (Wow)
         {
-            transform.position = Vector3.MoveTowards(transform.position, currentGoTarget.position, Time.deltaTime * 5f);
+        case 0:         break;
+        case 1:         break;
+        case 2:         break;
         }
-      
+        // ara sıra Vuracak Ara sıra kacacak
+        yield return new WaitForSeconds(2f);
+    }
 
-        // Eğer saldırı mesafesine ulaşıldıysa saldır
-        //saldiri mesafesi üret
-        if (Vector3.Distance(transform.position, currentGoTarget.position) <= 0.1f)
-        {
-          
-            AttackToEnemy();
-            // Saldırı işlemleri burada yapılabilir
-        }
-        
-    }
-    public void Update()
-    {
-        MoveAndAttack();
-    }
-    void AttackToEnemy() 
-    {
-        isAttacking = true;
-        if (OncePunch) 
-        {
-        }
-        //vurma animasyonu
-
-    }
-    IEnumerator Punching() 
-    {
-        Punch();
-        yield return new WaitForSeconds(1.5f);
-        OncePunch = true;
-        isAttacking = false;
-    }
-    void Punch()
-    {
-        // Animasyonu oynat
-        //if (animator != null)
-        //{
-        //animator.SetTrigger("Punch");
-        //}
-
-        // Yumruğun isabet ettiği hedefleri kontrol et
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 1);
-
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            // Düşmanlara hasar ver
-            enemy.GetComponent<Enemy>()?.TakeDamage(5);
-        }
-    }
+  
+    
 
     // Yumruğun menzilini görsel olarak göstermek için
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 1);
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }

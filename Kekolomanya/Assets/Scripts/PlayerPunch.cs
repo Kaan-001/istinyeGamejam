@@ -31,7 +31,7 @@ public class PlayerPunch : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             // Düşmanlara hasar ver
-            enemy.GetComponent<Enemy>()?.TakeDamage(punchDamage);
+            enemy.GetComponent<Enemy>().TakeDamage(punchDamage,this.gameObject);
         }
     }
 

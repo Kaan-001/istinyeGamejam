@@ -4,8 +4,9 @@ public class Enemy : MonoBehaviour
 {
     public int health = 50;
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, GameObject Focus)
     {
+       
         health -= damage;
         Debug.Log("Düşman hasar aldı! Kalan sağlık: " + health);
 

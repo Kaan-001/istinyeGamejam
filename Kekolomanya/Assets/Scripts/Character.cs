@@ -12,10 +12,11 @@ public class Character : MonoBehaviour
     public bool canSelectable = true;
     public Team team; // Karakterin takımı
     public int health = 100; // Sağlık değeri
-
-    public void TakeDamage(int damage)
+    public bool dead=false;
+    public void TakeDamage(int damage, GameObject Focus)
     {
         health -= damage;
+       
         Debug.Log(name + " hasar aldı! Kalan sağlık: " + health);
 
         if (health <= 0)
@@ -27,6 +28,6 @@ public class Character : MonoBehaviour
     void Die()
     {
         Debug.Log(name + " öldü!");
-        Destroy(gameObject); // Karakteri sahneden kaldır
+        dead = true;
     }
 }
