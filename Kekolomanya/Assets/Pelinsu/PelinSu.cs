@@ -28,24 +28,38 @@ public class PelinSu : MonoBehaviour
     }
     IEnumerator Chat()
     {
-        
+        Speech = false;
+        Ýnteractive.SetActive(false);
         //speechleri yazarsýn
-       
-        char[] stringsx = NpcSpeech[SpeechNumber].ToCharArray();
+        if (NpcSpeech[SpeechNumber] != null) 
+        {
+            char[] stringsx = NpcSpeech[SpeechNumber].ToCharArray();
 
-        StartCoroutine(SpeechCode.SpeechMan.SpeechRoutine(NpcSpeech[SpeechNumber], npcSprite));
+            StartCoroutine(SpeechCode.SpeechMan.SpeechRoutine(NpcSpeech[SpeechNumber],Player));
 
-        SpeechNumber += 1;
+            SpeechNumber += 1;
 
-        yield return new WaitForSeconds(stringsx.Length * 0.05f + 2.5f);
-        Once = true;
+            yield return new WaitForSeconds(stringsx.Length * 0.05f + 2f);
+
+            stringsx = NpcSpeech[SpeechNumber].ToCharArray();
+
+            StartCoroutine(SpeechCode.SpeechMan.SpeechRoutine(NpcSpeech[SpeechNumber], npcSprite));
+
+            SpeechNumber += 1;
+
+            yield return new WaitForSeconds(stringsx.Length * 0.05f + 2f);
+        }
+        SpeechNumber = 0;
+     
+        
+        
     }
     public void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             Speech = true;
-            Ýnteractive.SetActive(true);
+            
         }
     }
 }
