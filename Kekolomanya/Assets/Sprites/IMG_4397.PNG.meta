@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c33705fa4c5a6cc489da5f7eebb5aae9
+guid: 6bc26198568300d409c2d49779d58bb9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 250
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -147,91 +147,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: "yak\u0131\u015F\u0131kl\u0131 boyssss_0"
-      rect:
-        serializedVersion: 2
-        x: 34
-        y: 138
-        width: 484
-        height: 898
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 46cb55ce4c33c7844ace56a09cb8d6ae
-      internalID: 425359725
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "yak\u0131\u015F\u0131kl\u0131 boyssss_1"
-      rect:
-        serializedVersion: 2
-        x: 575
-        y: 126
-        width: 415
-        height: 910
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 30d9cbd3d3a89054e8e4163f7751659d
-      internalID: 719211739
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "yak\u0131\u015F\u0131kl\u0131 boyssss_2"
-      rect:
-        serializedVersion: 2
-        x: 1046
-        y: 126
-        width: 276
-        height: 929
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5e259e2560e5ade48a073312bf730b0f
-      internalID: -1101342260
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "yak\u0131\u015F\u0131kl\u0131 boyssss_3"
-      rect:
-        serializedVersion: 2
-        x: 1425
-        y: 131
-        width: 397
-        height: 937
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dc070ef63be601743bacad68395d5426
-      internalID: -2029216066
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -242,11 +158,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      "yak\u0131\u015F\u0131kl\u0131 boyssss_0": 425359725
-      "yak\u0131\u015F\u0131kl\u0131 boyssss_1": 719211739
-      "yak\u0131\u015F\u0131kl\u0131 boyssss_2": -1101342260
-      "yak\u0131\u015F\u0131kl\u0131 boyssss_3": -2029216066
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

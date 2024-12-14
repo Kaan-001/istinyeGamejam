@@ -117,6 +117,7 @@ public class NPCFighter : MonoBehaviour
         case 1:         break;
         case 2:         break;
         }
+
         // ara sıra Vuracak Ara sıra kacacak
         yield return new WaitForSeconds(2f);
     }

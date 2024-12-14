@@ -37,7 +37,7 @@ public class SpeechCode : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
         }
         yield return new WaitForSeconds(0.5f);
-        SpeechObj.transform.DOLocalMoveY(-900, 0.5f);
+        SpeechObj.transform.DOLocalMoveY(-1500, 0.5f);
       
         
 
