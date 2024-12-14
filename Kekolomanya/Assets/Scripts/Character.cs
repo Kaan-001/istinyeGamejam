@@ -9,7 +9,7 @@ public class Character : MonoBehaviour
         PlayerTeam,
         EnemyTeam
     }
-
+    public bool canSelectable = true;
     public Team team; // Karakterin takımı
     public int health = 100; // Sağlık değeri
 

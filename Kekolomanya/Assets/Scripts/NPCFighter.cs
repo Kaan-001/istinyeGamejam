@@ -1,159 +1,157 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
+using DG.Tweening;
 public class NPCFighter : MonoBehaviour
 {
-    public float moveSpeed = 3f;
-    public float attackRange = 1.5f;
-    public int attackDamage = 10;
-    public float attackCooldown = 1f;
-    public float lowHealthThreshold = 20f;
-    public float retreatDistance = 5f;
-    public float retreatTime = 3f;
-
-    // Hareket sınırları
-    public float minX = -10f;
-    public float maxX = 10f;
-    public float minY = -5f;
-    public float maxY = 5f;
-
-    // Kaçış noktası ve kaçış süresi
-    private Vector3 retreatPosition;
-    private bool isRetreating = false;
-    private float retreatWaitTime = 3f;
-    private float retreatTimer = 0f;
-
-    private Transform target;
-    private float attackCooldownTimer = 0f;
+ 
     private Character character;
-
+    public GameObject[] Enemys;
+    public List<GameObject> enemies;
+    public GameObject currentTarget;
+    public Transform currentGoTarget;
+    public bool isAttacking, OncePunch;
+    // bütün oyuncuları buluyor 
     void Start()
     {
         character = GetComponent<Character>();
-        ClampPosition();
-    }
+        
+        Enemys = GameObject.FindGameObjectsWithTag("Fighter");
 
-    void Update()
-    {
-        if (attackCooldownTimer > 0)
+        for (int i = 0; i < Enemys.Length; i++)
         {
-            attackCooldownTimer -= Time.deltaTime;
-        }
-
-        if (isRetreating)
-        {
-            RetreatBehavior();
-        }
-        else
-        {
-            FightBehavior();
-        }
-
-    }
-
-    void FightBehavior()
-    {
-        if (character.health <= lowHealthThreshold && !isRetreating)
-        {
-            StartRetreat();
-        }
-
-        if (target == null || target.GetComponent<Character>().health <= 0)
-        {
-            FindTarget();
-        }
-
-        if (target != null)
-        {
-            float distance = Vector2.Distance(transform.position, target.position);
-
-            if (distance > attackRange)
+          
+            if (!enemies.Contains(Enemys[i]) && character.team != Enemys[i].GetComponent<Character>().team) 
             {
-                MoveTowardsTarget();
-            }
-            else if (attackCooldownTimer <= 0)
-            {
-                Attack();
+                enemies.Add(Enemys[i]);
             }
         }
+        ChoosingEnemy();
+
     }
-
-    void StartRetreat()
+    public void ChoosingEnemy()
     {
-        isRetreating = true;
-        // Kaçış noktasını rastgele belirle
-        retreatPosition = new Vector3(
-            Random.Range(minX, maxX),
-            Random.Range(minY, maxY),
-            transform.position.z
-        );
-        Debug.Log(retreatPosition);
-        retreatTimer = retreatWaitTime;
-    }
+        int randomChooseNum = UnityEngine.Random.Range(0, enemies.Count);
 
-    void RetreatBehavior()
-    {
-        // Kaçış noktasına doğru hareket et
-        Vector2 direction = (retreatPosition - transform.position).normalized;
-        transform.position += (Vector3)direction * moveSpeed * Time.deltaTime;
-
-        // Kaçış noktasına ulaştığında bekleme
-        if (Vector2.Distance(transform.position, retreatPosition) < 0.5f)
+        if (enemies.Count > 0 && enemies[randomChooseNum].GetComponent<Character>().canSelectable ) 
         {
-            retreatTimer -= Time.deltaTime;
+            enemies[randomChooseNum].GetComponent<Character>().canSelectable = true;
 
-            if (retreatTimer <= 0)
-            {
-                // Bekleme süresi bittiğinde dövüşe geri dön
-                isRetreating = false;
-            }
+            currentTarget = enemies[randomChooseNum]; 
+        }
+
+        if(currentTarget!=null) GoToEnemy();
+       
+    }
+    void GoToEnemy() 
+    {
+        if (this.transform.position.x-currentTarget.transform.position.x < 0) 
+        {
+            SelectClosestChild();
+        //düşmanım sağda
+        }
+        else 
+        {
+            //düşmanım solda
+            SelectClosestChild();
+        }
+        // current targetin 2 childindan en yakın olan child seçilir ve o child a gidilir
+    }
+
+    // 1. En yakın child'ı seç
+    void SelectClosestChild()
+    {
+        // Eğer currentTarget atanmadıysa hata ver ve işlemi durdur
+        if (currentTarget == null)
+        {
+            Debug.LogWarning("currentTarget atanmadı!");
+            return;
+        }
+
+        // currentTarget'ın child sayısını kontrol et
+        if (currentTarget.transform.childCount < 2)
+        {
+            Debug.LogWarning("currentTarget'ın yeterli sayıda child'ı yok!");
+            return;
+        }
+
+        // Child'lara erişim
+        Transform child1 = currentTarget.transform.GetChild(0);
+        Transform child2 = currentTarget.transform.GetChild(1);
+
+        // Mesafeleri hesapla
+        float distanceToChild1 = Vector2.Distance(transform.position, child1.position);
+        float distanceToChild2 = Vector2.Distance(transform.position, child2.position);
+
+        // En yakın olan child'ı seç
+        currentGoTarget = distanceToChild1 < distanceToChild2 ? child1 : child2;
+
+       
+    }
+    void MoveAndAttack()
+    {
+
+        // Pozisyona hareket
+        if (!isAttacking) 
+        {
+            transform.position = Vector3.MoveTowards(transform.position, currentGoTarget.position, Time.deltaTime * 5f);
+        }
+      
+
+        // Eğer saldırı mesafesine ulaşıldıysa saldır
+        //saldiri mesafesi üret
+        if (Vector3.Distance(transform.position, currentGoTarget.position) <= 0.1f)
+        {
+          
+            AttackToEnemy();
+            // Saldırı işlemleri burada yapılabilir
+        }
+        
+    }
+    public void Update()
+    {
+        MoveAndAttack();
+    }
+    void AttackToEnemy() 
+    {
+        isAttacking = true;
+        if (OncePunch) 
+        {
+        }
+        //vurma animasyonu
+
+    }
+    IEnumerator Punching() 
+    {
+        Punch();
+        yield return new WaitForSeconds(1.5f);
+        OncePunch = true;
+        isAttacking = false;
+    }
+    void Punch()
+    {
+        // Animasyonu oynat
+        //if (animator != null)
+        //{
+        //animator.SetTrigger("Punch");
+        //}
+
+        // Yumruğun isabet ettiği hedefleri kontrol et
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 1);
+
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            // Düşmanlara hasar ver
+            enemy.GetComponent<Enemy>()?.TakeDamage(5);
         }
     }
 
-    void MoveTowardsTarget()
+    // Yumruğun menzilini görsel olarak göstermek için
+    private void OnDrawGizmosSelected()
     {
-        Vector2 direction = (target.position - transform.position).normalized;
-        transform.position += (Vector3)direction * moveSpeed * Time.deltaTime;
-
-        if (direction.x < 0)
-        {
-            transform.localScale = new Vector3(-1, 1, 1);  // Sol tarafa dönme
-        }
-        else
-        {
-            transform.localScale = new Vector3(1, 1, 1);   // Sağ tarafa dönme
-        }
-    }
-
-    void Attack()
-    {
-        attackCooldownTimer = attackCooldown;
-
-        Character targetCharacter = target.GetComponent<Character>();
-        if (targetCharacter != null)
-        {
-            targetCharacter.TakeDamage(attackDamage);
-        }
-    }
-
-    void FindTarget()
-    {
-        Character[] potentialTargets = FindObjectsOfType<Character>()
-            .Where(c => c.team != character.team && c.health > 0)
-            .ToArray();
-
-        if (potentialTargets.Length > 0)
-        {
-            target = potentialTargets[Random.Range(0, potentialTargets.Length)].transform;
-        }
-    }
-
-    void ClampPosition()
-    {
-        // Mevcut pozisyonu sınırlar içinde tut
-        float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
-        float clampedY = Mathf.Clamp(transform.position.y, minY, maxY);
-        transform.position = new Vector3(clampedX, clampedY, transform.position.z);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, 1);
     }
 }
