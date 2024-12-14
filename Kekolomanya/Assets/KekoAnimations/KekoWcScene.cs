@@ -68,7 +68,12 @@ public class KekoWcScene : MonoBehaviour
             // Burada Vignette'e eriþilmiþ olur. Þimdi intensity'yi deðiþtirebilirsiniz.
             DOTween.To(() => vignette.intensity.value, x => vignette.intensity.Override(x), 1f, 1f); // Örneðin intensity'yi 0.5 olarak ayarla
         }
+
+        HaritaArea.Leveller = new bool[4];
+        HaritaArea.Leveller[0] = true;
+        HaritaArea.Leveller[1] = true;
         yield return new WaitForSeconds(1);
+
         SceneManager.LoadScene("HaritaSahne");
 
     }

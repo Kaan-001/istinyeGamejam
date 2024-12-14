@@ -6,8 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Home.unity
+    guid: 9e92a6cf174c68b43ba27547a71d694d
+  - enabled: 1
     path: Assets/Scenes/WCsahne.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Koridor.unity
+    guid: de80f38fb3634984ba0000fb5a47a77a
+  - enabled: 1
+    path: Assets/Scenes/Bahce.unity
+    guid: ee03451dc272c41468517f87e8d3a79f
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: c0a8c6672056d6c4893141641e12702d
   - enabled: 1
     path: Assets/Scenes/HaritaSahne.unity
     guid: dbae1c5d08a60d84d83fb27c59a89409
