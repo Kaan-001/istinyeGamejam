@@ -26,9 +26,9 @@ public class KekoWcScene : MonoBehaviour
     {
         // kullandýðýn stringdeki char baþýna 0.05 saniye tutup buna 1 saniye ekleyerek 
 
-
+        this.gameObject.GetComponent<Animator>().Play("WalkKeko");
         yield return new WaitForSeconds(4.5f);
-
+        this.gameObject.GetComponent<Animator>().Play("IdleKeko");
         string speechMan = "La TIRREK sen benim biricik Pelinsuyucuguma ne hakla. Ne cürretle yan gözle bakarsýn heaggg!?";
         char[] stringsx = speechMan.ToCharArray();
         StartCoroutine(SpeechCode.SpeechMan.SpeechRoutine(speechMan,Keko));

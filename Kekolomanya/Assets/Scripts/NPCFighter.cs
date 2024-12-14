@@ -5,6 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 public class NPCFighter : MonoBehaviour
 {
+    public Animator animator;
     public LayerMask Which; // Saldırı yapabileceği katman
     private Character character;
     public GameObject[] Enemys; // Tüm düşmanlar
@@ -26,6 +27,7 @@ public class NPCFighter : MonoBehaviour
     void Start()
     {
         // Karakter bileşenini al
+        animator = GetComponent<Animator>();
         character = GetComponent<Character>();
 
         // Tüm düşmanları bul ve filtrele
@@ -138,11 +140,13 @@ public class NPCFighter : MonoBehaviour
         {
             FaceDirection(Vector2.left);
         }
+
         switch (Wow)
         {
             case 0:
                 while (Vector2.Distance(transform.position, currentGoTarget.position) > 0.1f)
                 {
+                    animator.Play("Walk");
                     transform.position = Vector2.MoveTowards(transform.position, currentGoTarget.position, moveSpeed * Time.deltaTime);
                     yield return null;
                 }
@@ -164,6 +168,7 @@ public class NPCFighter : MonoBehaviour
                 }
                 while (Vector2.Distance(transform.position, currentGoTarget.position) > 0.1f)
                 {
+                    animator.Play("Walk");
                     transform.position = Vector2.MoveTowards(transform.position, currentGoTarget.position, moveSpeed * Time.deltaTime);
                     yield return null;
                 }
@@ -186,6 +191,7 @@ public class NPCFighter : MonoBehaviour
                 }
                 while (Vector2.Distance(transform.position, Pos) > 0.1f)
                 {
+                    animator.Play("Walk");
                     transform.position = Vector2.MoveTowards(transform.position, Pos, moveSpeed * Time.deltaTime);
                     yield return null;
                 }
@@ -217,7 +223,9 @@ public class NPCFighter : MonoBehaviour
     IEnumerator Punching()
     {
         Punch();
+        animator.Play("Attack");
         yield return new WaitForSeconds(1.5f); // Yumruk animasyon süresi kadar bekle
+        animator.Play("Idle");
         ChoosingEnemy();
     }
 
@@ -228,7 +236,7 @@ public class NPCFighter : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Character>().TakeDamage(100);
+            enemy.GetComponent<Character>().TakeDamage(10);
             Debug.Log("Hasar verildi");
         }
     }
