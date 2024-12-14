@@ -44,7 +44,7 @@ public class KekoWcScene : MonoBehaviour
 
 
         yield return new WaitForSeconds(stringsx.Length * 0.05f +2.5f);
-        speechMan = "Kes!!!!!";
+        speechMan = "Kes lan Dingil!? Gel lan Buraya 50 kuruþunu yediðim Murrooo!?!!";
         stringsx = null;
         stringsx = speechMan.ToCharArray();
         StartCoroutine(SpeechCode.SpeechMan.SpeechRoutine(speechMan,Keko));
@@ -52,14 +52,17 @@ public class KekoWcScene : MonoBehaviour
 
         CinemachineCameraState.Cinestate.animator.Play("WcNoZoom");
         yield return new WaitForSeconds(stringsx.Length * 0.05f +3);
-        
+        HocaObj.transform.DOMoveX(Hocatransform.position.x, 0.25f);
+
         yield return new WaitForSeconds(1);
 
-        HocaObj.transform.DOMoveX(Hocatransform.position.x, 1);
+        //Hocanin girdiði kýsým sonra Ýfle kontrol edilir
+        // while(PlayerHealth)
+        
         speechMan = "Oglum Hadi Problem çýkarmayýn! Doðru Derslere.";
         
         StartCoroutine(SpeechCode.SpeechMan.SpeechRoutine(speechMan, Hoca));
-        yield return new WaitForSeconds(stringsx.Length * 0.05f + 5);
+        yield return new WaitForSeconds(stringsx.Length * 0.05f + 4);
         if (GlobalVolume.profile.TryGet<Vignette>(out Vignette vignette))
         {
             // Burada Vignette'e eriþilmiþ olur. Þimdi intensity'yi deðiþtirebilirsiniz.

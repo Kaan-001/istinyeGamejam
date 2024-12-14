@@ -21,10 +21,23 @@ public class SpeechCode : MonoBehaviour
     public IEnumerator SpeechRoutine(string currentSpeechString, Sprite willShow) 
     {
         speechmanImage.sprite = willShow;
+        switch (willShow.name) 
+        {
+            case "Keko": speechmanImage.transform.DOLocalMoveX(745, 0);
+                break;
+            case "Hoca":
+                speechmanImage.transform.DOLocalMoveX(745, 0);
+                break;
+
+            case "Player":
+                speechmanImage.transform.DOLocalMoveX(-665, 0);
+
+                break;
+        }
 
         speechText.text = "";
         
-        SpeechObj.transform.DOLocalMoveY(-425, 0.5f);
+        SpeechObj.transform.DOLocalMoveY(0, 0.5f);
 
         yield return new WaitForSeconds(0.5f);
 
@@ -37,7 +50,7 @@ public class SpeechCode : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
         }
         yield return new WaitForSeconds(0.5f);
-        SpeechObj.transform.DOLocalMoveY(-1500, 0.5f);
+        SpeechObj.transform.DOLocalMoveY(-1200, 0.5f);
       
         
 
