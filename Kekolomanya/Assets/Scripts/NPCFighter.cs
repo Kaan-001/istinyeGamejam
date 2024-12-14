@@ -93,8 +93,18 @@ public class NPCFighter : MonoBehaviour
             return;
         }
 
-        // En yakın child'ı seç
-        SelectClosestChild();
+        if (this.transform.position.x - currentTarget.transform.position.x < 0)
+        {
+            // Düşman sağda, sağa dön
+            SelectClosestChild();
+            FaceDirection(Vector2.right); // Sağ yöne dön
+        }
+        else
+        {
+            // Düşman solda, sola dön
+            SelectClosestChild();
+            FaceDirection(Vector2.left); // Sol yöne dön
+        }
     }
 
     void SelectClosestChild()
@@ -184,7 +194,8 @@ public class NPCFighter : MonoBehaviour
 
     void Punch()
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, attackRange, Which);
+        Vector2 punchPosition = transform.position + transform.right * 1f;
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(punchPosition , attackRange, Which);
 
         foreach (Collider2D enemy in hitEnemies)
         {
@@ -195,7 +206,23 @@ public class NPCFighter : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
+        Vector2 punchPosition = transform.position + transform.right * 1f;
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.DrawWireSphere(punchPosition, attackRange);
+    }
+
+    void FaceDirection(Vector2 direction)
+    {
+        // Yönü değiştirmek için rotayı ayarla
+        if (direction == Vector2.right)
+        {
+            // Sağ yönü göster
+            transform.rotation = Quaternion.Euler(0, 0, 0); // Yalnızca X-Y düzleminde döndürme
+        }
+        else if (direction == Vector2.left)
+        {
+            // Sol yönü göster
+            transform.rotation = Quaternion.Euler(0, 180, 0); // 180 derece döndür
+        }
     }
 }
