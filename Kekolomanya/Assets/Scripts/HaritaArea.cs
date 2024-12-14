@@ -34,7 +34,7 @@ public class HaritaArea : MonoBehaviour
     IEnumerator LevelChanger() 
     {
         obj[levelOfScene].transform.GetChild(1).transform.DOScale(1, 1);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(4f);
         if (GlobalVolume.profile.TryGet<Vignette>(out Vignette vignette))
         {
             // Burada Vignette'e eriþilmiþ olur. Þimdi intensity'yi deðiþtirebilirsiniz.
