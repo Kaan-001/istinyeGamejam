@@ -9,7 +9,6 @@ public class PlayerPunch : MonoBehaviour
     public LayerMask enemyLayer; // Düşmanların olduğu katman
     public Animator animator; // Karakterin Animator bileşeni
     public static bool attackanim = false;
-<<<<<<< HEAD
 
     public AudioSource punching;
     public AudioClip punch;
@@ -19,8 +18,7 @@ public class PlayerPunch : MonoBehaviour
     public GameObject WinningPanel;
 
 
-=======
->>>>>>> parent of 60f5cdf (MUsic added)
+
     private void Start()
     {
         animator = GetComponent<Animator>();
