@@ -87,7 +87,7 @@ public class FriendAı : MonoBehaviour
 
     private IEnumerator MoveToTarget()
     {
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, GetRandomTarget().position, moveSpeed * Time.deltaTime);
 
         if (Vector2.Distance(transform.position, targetPosition) < 0.1f)
         {
@@ -119,8 +119,11 @@ public class FriendAı : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            Debug.Log("Düşman birine hasar verdi !!");
-            //CAN AZALTMA FONKSİYONU BURAYA
+            Debug.Log("KEKOYA HASAR birine hasar verdi !!");
+            if (enemy.GetComponent<Enemy>())
+            {
+                enemy.GetComponent<Enemy>().TakeDamage(10);
+            }
         }
     }
 
