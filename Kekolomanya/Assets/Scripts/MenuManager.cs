@@ -8,6 +8,11 @@ public class MenuManager : MonoBehaviour
     public string menuScene;
     public string PlayAgainScene;
 
+    void Start()
+    {
+        KekoWcScene.Fight = true;
+    }
+
     public void StartingGameButton()
     {
         SceneManager.LoadScene(gameScene);
