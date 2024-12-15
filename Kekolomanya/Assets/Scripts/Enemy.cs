@@ -19,5 +19,6 @@ public class Enemy : MonoBehaviour
     {
         Debug.Log("Düşman öldü!");
         Destroy(gameObject); // Düşmanı yok et
+
     }
 }
