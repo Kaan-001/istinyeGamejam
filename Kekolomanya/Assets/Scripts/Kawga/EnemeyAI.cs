@@ -152,13 +152,6 @@ public class EnemeyAI : MonoBehaviour
             if (enemy.GetComponent<Enemy>()) 
             {
                 enemy.GetComponent<Enemy>().TakeDamage(1);
-
-                ph.diedEnemies++;
-
-                if(ph.diedEnemies == 2)
-                {
-                    ph.WinningPanel.SetActive(true);
-                }
             }
             else 
             {
