@@ -7,16 +7,28 @@ public class PlayerPunch : MonoBehaviour
     public float punchRange = 1.5f; // Yumruğun menzili
     public int punchDamage = 10; // Yumruk hasarı
     public LayerMask enemyLayer; // Düşmanların olduğu katman
-    //public Animator animator; // Karakterin Animator bileşeni
-
+    public Animator animator; // Karakterin Animator bileşeni
+    public static bool attackanim = false;
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0)) // Yumruk atmak için Space tuşu
+        if (Input.GetMouseButtonDown(0) && !attackanim) // Yumruk atmak için Space tuşu
         {
             Punch();
+           
         }
+        
     }
-
+    public IEnumerator Anim()
+    {
+        attackanim = true;
+        
+        yield return new WaitForSeconds(0.5f);
+        attackanim = false;
+    }
     void Punch()
     {
         // Animasyonu oynat
@@ -26,6 +38,7 @@ public class PlayerPunch : MonoBehaviour
         //}
 
         // Yumruğun isabet ettiği hedefleri kontrol et
+        StartCoroutine(Anim());
         Vector2 punchPosition = transform.position + transform.right * 1f;
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(punchPosition, punchRange, enemyLayer);
@@ -33,7 +46,7 @@ public class PlayerPunch : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             // Düşmanlara hasar ver
-            enemy.GetComponent<Character>().TakeDamage(100);
+            enemy.GetComponent<Enemy>().TakeDamage(10);
         }
     }
 

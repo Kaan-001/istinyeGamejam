@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 4f; // Hareket hızı
     private Vector2 movement;   // Hareket vektörü
     private Rigidbody2D rb;     // Rigidbody bileşeni
-
+  
     private Animator animator;  // Animator bileşeni
     private SpriteRenderer spriteRenderer; // Sprite Renderer
 
@@ -41,31 +41,30 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         // Rigidbody ile pozisyon hareketi
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+      if(!PlayerPunch.attackanim)  rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 
     void AnimationControl()
     {
         // Eğer hareket varsa "walk" animasyonu, yoksa "Idle" animasyonu oynat
-        if (movement.x != 0 || movement.y != 0)
+        if (!PlayerPunch.attackanim) 
         {
-            animator.Play("walk");
+            if (movement.x != 0 || movement.y != 0  )
+            {
+                animator.Play("walk");
+            }
+            else if(movement.x == 0 || movement.y == 0 ) 
+            {
+                animator.Play("Idle");
+            }
         }
-        else
+        else 
         {
-            animator.Play("Idle");
-        }
-        if (Input.GetMouseButtonDown(0))
-        {
-            StartCoroutine(Anim());
+            animator.Play("Attack");
         }
     }
 
-    public IEnumerator Anim()
-    {
-        animator.Play("Attack");
-        yield return new WaitForSeconds(5f);
-    }
+    
 
     void FaceDirection(Vector2 direction)
     {

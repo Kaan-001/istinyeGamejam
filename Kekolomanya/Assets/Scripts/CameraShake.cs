@@ -16,7 +16,7 @@ public class CameraShake : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if ( PlayerPunch.attackanim)
         {
             ShakeCamera();
         }

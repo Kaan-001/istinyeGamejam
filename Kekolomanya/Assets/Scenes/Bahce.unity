@@ -338,6 +338,7 @@ GameObject:
   - component: {fileID: 261513155}
   - component: {fileID: 261513154}
   - component: {fileID: 261513153}
+  - component: {fileID: 261513158}
   m_Layer: 6
   m_Name: Pelinsuu (1)
   m_TagString: PlayerTeam
@@ -505,6 +506,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &261513158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261513152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 577f17e1074a0a1448a5524af270b142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
 --- !u!1 &285407252
 GameObject:
   m_ObjectHideFlags: 0
@@ -1694,6 +1708,7 @@ GameObject:
   - component: {fileID: 1518772680}
   - component: {fileID: 1518772679}
   - component: {fileID: 1518772683}
+  - component: {fileID: 1518772684}
   m_Layer: 6
   m_Name: Pelinsuu
   m_TagString: PlayerTeam
@@ -1861,6 +1876,19 @@ MonoBehaviour:
     m_Bits: 8
   attackRange: 0.5
   GizmodPos: {fileID: 1213167495}
+--- !u!114 &1518772684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518772678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 577f17e1074a0a1448a5524af270b142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
 --- !u!1 &1727841462
 GameObject:
   m_ObjectHideFlags: 0
@@ -2072,6 +2100,7 @@ GameObject:
   - component: {fileID: 2064607288}
   - component: {fileID: 2064607287}
   - component: {fileID: 2064607286}
+  - component: {fileID: 2064607292}
   m_Layer: 3
   m_Name: Enemy (2)
   m_TagString: EnemyTeam
@@ -2261,6 +2290,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &2064607292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064607285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 577f17e1074a0a1448a5524af270b142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
 --- !u!212 &152499450359412997
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2388,6 +2430,7 @@ GameObject:
   - component: {fileID: 5881198272785170071}
   - component: {fileID: 7041912616859585255}
   - component: {fileID: 8387813913279798979}
+  - component: {fileID: 8387813913279798980}
   m_Layer: 3
   m_Name: Enemy (1)
   m_TagString: EnemyTeam
@@ -2619,6 +2662,19 @@ MonoBehaviour:
   moveSpeed: 3
   GizmodPos: {fileID: 4491865932495902980}
   attackRange: 0.5
+--- !u!114 &8387813913279798980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3819272178125014179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 577f17e1074a0a1448a5524af270b142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
 --- !u!4 &9123465853231206063
 Transform:
   m_ObjectHideFlags: 0
