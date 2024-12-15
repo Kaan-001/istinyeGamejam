@@ -18,7 +18,6 @@ public class PlayerPunch : MonoBehaviour
     public GameObject WinningPanel;
 
 
-
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -35,7 +34,7 @@ public class PlayerPunch : MonoBehaviour
     public IEnumerator Anim()
     {
         attackanim = true;
-
+        punching.PlayOneShot(punch);
         //Yumruk sesi
 
         yield return new WaitForSeconds(0.5f);
