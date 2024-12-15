@@ -15,7 +15,8 @@ public class KekoWcScene : MonoBehaviour
     public Volume GlobalVolume;
     public static bool Fight=false;
     public GameObject KekoOBj;
-
+    public AudioSource AudioSource;
+    public AudioClip KekoAudio0, KekoAudio1, KekoAudio2, PlayerAudio,HocaAudio;
     void Start()
     {
         this.gameObject.transform.DOMoveX(KekoTransform.position.x, 4.5f).SetEase(Ease.Linear);
@@ -30,6 +31,7 @@ public class KekoWcScene : MonoBehaviour
         Fight = false;
         this.gameObject.GetComponent<Animator>().Play("Walk");
         yield return new WaitForSeconds(4.5f);
+        AudioSource.PlayOneShot(KekoAudio0);
         this.gameObject.GetComponent<Animator>().Play("IdleKeko");
         string speechMan = "La TIRREK sen benim biricik Pelinsuyucuguma Ne curretle yan gozle bakarsin heaggg!?";
         char[] stringsx = speechMan.ToCharArray();
@@ -38,6 +40,7 @@ public class KekoWcScene : MonoBehaviour
 
 
         yield return new WaitForSeconds(stringsx.Length * 0.05f+2.5f);
+        AudioSource.PlayOneShot(PlayerAudio);
         speechMan = "Jilet abi vallaha ben birsey yapmadim.";
         stringsx = null;
         stringsx = speechMan.ToCharArray();
@@ -45,6 +48,7 @@ public class KekoWcScene : MonoBehaviour
 
         yield return new WaitForSeconds(stringsx.Length * 0.05f +2.5f);
         speechMan = "Kes lan Dingil!? Gel lan Buraya simdi sen görürsün";
+        AudioSource.PlayOneShot(KekoAudio1);
         stringsx = null;
         stringsx = speechMan.ToCharArray();
         StartCoroutine(SpeechCode.SpeechMan.SpeechRoutine(speechMan,Keko));
@@ -72,9 +76,14 @@ public class KekoWcScene : MonoBehaviour
         yield return new WaitForSeconds(1);
        
         speechMan = "Oglum Hadi Problem cikarmayin! Dogru Derslere.";
-
+        AudioSource.PlayOneShot(HocaAudio);
         StartCoroutine(SpeechCode.SpeechMan.SpeechRoutine(speechMan, Hoca));
+        yield return new WaitForSeconds(stringsx.Length * 0.05f + 2);
+        AudioSource.PlayOneShot(KekoAudio2);
+        speechMan = "Bu is bitmedi cikista gorursun!!!";
+        StartCoroutine(SpeechCode.SpeechMan.SpeechRoutine(speechMan, Keko));
         yield return new WaitForSeconds(stringsx.Length * 0.05f + 4);
+
         if (GlobalVolume.profile.TryGet<Vignette>(out Vignette vignette))
         {
             // Burada Vignette'e eri�ilmi� olur. �imdi intensity'yi de�i�tirebilirsiniz.
