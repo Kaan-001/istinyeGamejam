@@ -5,10 +5,12 @@ using DG.Tweening;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 public class KekoWcScene : MonoBehaviour
 {
 
     // Start is called before the first frame update
+    public GameObject ekranagelir;
     public Transform KekoTransform, Hocatransform;
     public GameObject HocaObj;
     public Sprite Hoca, Keko, Player;
@@ -90,6 +92,7 @@ public class KekoWcScene : MonoBehaviour
             DOTween.To(() => vignette.intensity.value, x => vignette.intensity.Override(x), 1f, 1f); // �rne�in intensity'yi 0.5 olarak ayarla
         }
 
+        ekranagelir.transform.DOScale(1, 2.5f);
         HaritaArea.Leveller = new bool[4];
         HaritaArea.Leveller[0] = true;
         HaritaArea.Leveller[1] = true;
