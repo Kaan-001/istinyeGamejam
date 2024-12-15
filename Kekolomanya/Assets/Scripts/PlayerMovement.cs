@@ -20,6 +20,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (KekoWcScene.Fight) 
+        {
+       
         // Hareket girişi
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
@@ -36,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Animasyon kontrolü
         AnimationControl();
+        }
     }
 
     void FixedUpdate()

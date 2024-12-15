@@ -13,6 +13,8 @@ public class KekoWcScene : MonoBehaviour
     public GameObject HocaObj;
     public Sprite Hoca, Keko, Player;
     public Volume GlobalVolume;
+    public static bool Fight=false;
+    public GameObject KekoOBj;
 
     void Start()
     {
@@ -25,8 +27,8 @@ public class KekoWcScene : MonoBehaviour
     public IEnumerator SpeechKeko() 
     {
         // kulland���n stringdeki char ba��na 0.05 saniye tutup buna 1 saniye ekleyerek 
-
-        this.gameObject.GetComponent<Animator>().Play("WalkKeko");
+        Fight = false;
+        this.gameObject.GetComponent<Animator>().Play("Walk");
         yield return new WaitForSeconds(4.5f);
         this.gameObject.GetComponent<Animator>().Play("IdleKeko");
         string speechMan = "La TIRREK sen benim biricik Pelinsuyucuguma ne hakla. Ne c�rretle yan g�zle bakars�n heaggg!?";
@@ -52,15 +54,27 @@ public class KekoWcScene : MonoBehaviour
 
         CinemachineCameraState.Cinestate.animator.Play("WcNoZoom");
         yield return new WaitForSeconds(stringsx.Length * 0.05f +3);
+        Fight = true;
+        KekoOBj.GetComponent<EnemeyAI>().enabled = true;
+        KekoOBj.GetComponent<Enemy>().enabled = true;
+        KekoOBj.GetComponent<SpriteRenderer>().flipX = false;
+        // şuan dövüş yapılması gereken şeyler eklenir
+
+
+        // burada dövüş sahnesi başlar
+        while (PlayerHealth.currentHealth>50)
+         {
+            yield return new WaitForSeconds(1);
+        }
         HocaObj.transform.DOMoveX(Hocatransform.position.x, 0.25f);
-
+        Fight = false;
+        Destroy(KekoOBj.GetComponent<EnemeyAI>());
+        Destroy(KekoOBj.GetComponent<Enemy>());
+        this.gameObject.GetComponent<Animator>().Play("IdleKeko");
         yield return new WaitForSeconds(1);
+       
+        speechMan = "Oglum Hadi Problem cikarmayin! Dogru Derslere.";
 
-        //Hocanin girdi�i k�s�m sonra �fle kontrol edilir
-        // while(PlayerHealth){}
-        
-        speechMan = "Oglum Hadi Problem ��karmay�n! Do�ru Derslere.";
-        
         StartCoroutine(SpeechCode.SpeechMan.SpeechRoutine(speechMan, Hoca));
         yield return new WaitForSeconds(stringsx.Length * 0.05f + 4);
         if (GlobalVolume.profile.TryGet<Vignette>(out Vignette vignette))
@@ -75,6 +89,7 @@ public class KekoWcScene : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         SceneManager.LoadScene("HaritaSahne");
+
 
     }
    

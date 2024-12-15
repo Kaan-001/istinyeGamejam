@@ -21,7 +21,10 @@ public class EnemeyAI : MonoBehaviour
     public void ChoosingEnemy()
     {
         // Hedef listesini oluştur ve PlayerTeam tag'ine sahip nesneleri ekle
+        
+
         targetList = new List<Transform>();
+        
         GameObject[] targets = GameObject.FindGameObjectsWithTag("PlayerTeam");
 
         foreach (GameObject target in targets)
@@ -37,7 +40,6 @@ public class EnemeyAI : MonoBehaviour
             StartCoroutine(MoveToTarget());
         }
     }
-
     public void ChoosingEnemyRandomly()
     {
         // Hedef listesini oluştur ve PlayerTeam tag'ine sahip nesneleri ekle
@@ -57,7 +59,6 @@ public class EnemeyAI : MonoBehaviour
             StartCoroutine(MoveToTarget());
         }
     }
-
     private Transform GetRandomTarget()
     {
         // Eğer listede eleman yoksa null döndür
@@ -73,7 +74,6 @@ public class EnemeyAI : MonoBehaviour
         // Rastgele seçilen GameObject'i döndür
         return targetList[randomIndex].transform;
     }
-
     // En yakın hedefi bulan fonksiyon
     private Transform FindClosestTarget()
     {
@@ -92,7 +92,6 @@ public class EnemeyAI : MonoBehaviour
 
         return nearest;
     }
-
     // Hedefe doğru hareket eden fonksiyon
     private IEnumerator MoveToTarget()
     {
@@ -121,23 +120,20 @@ public class EnemeyAI : MonoBehaviour
             yield return null; // Bir sonraki frame'e kadar bekle
         }
     }
-
     void AttackToEnemy()
     {
-
+        
         StartCoroutine(Punching());
 
     }
-
     IEnumerator Punching()
     {
         Punch();
         animator.Play("Attack");
-        yield return new WaitForSeconds(1.5f); // Yumruk animasyon süresi kadar bekle
+        yield return new WaitForSeconds(0.5f); // Yumruk animasyon süresi kadar bekle
         animator.Play("Idle");
         ChoosingEnemyRandomly();
     }
-
     void Punch()
     {
         Vector2 punchPosition = GizmodPos.transform.position;
@@ -146,16 +142,25 @@ public class EnemeyAI : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             Debug.Log("Düşman birine hasar verdi !!");
+            
+            if (enemy.GetComponent<Enemy>()) 
+            {
+                enemy.GetComponent<Enemy>().TakeDamage(10);
+            
+            }
+            else 
+            {
+            enemy.GetComponent<PlayerHealth>().TakeDamage(10);
+            }
+            
         }
     }
-
     private void OnDrawGizmosSelected()
     {
         Vector2 punchPosition = GizmodPos.transform.position;
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(punchPosition, attackRange);
     }
-
     void FaceDirection(Vector2 direction)
     {
         // Yönü değiştirmek için rotayı ayarla

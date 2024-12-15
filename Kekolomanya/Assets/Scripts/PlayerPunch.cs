@@ -15,7 +15,7 @@ public class PlayerPunch : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !attackanim) // Yumruk atmak için Space tuşu
+        if (Input.GetMouseButtonDown(0) && !attackanim && KekoWcScene.Fight ) // Yumruk atmak için Space tuşu
         {
             Punch();
            
@@ -25,7 +25,9 @@ public class PlayerPunch : MonoBehaviour
     public IEnumerator Anim()
     {
         attackanim = true;
-        
+
+        //Yumruk sesi
+
         yield return new WaitForSeconds(0.5f);
         attackanim = false;
     }
