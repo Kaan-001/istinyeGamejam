@@ -12,6 +12,8 @@ public class PlayerPunch : MonoBehaviour
     public GameObject punchPosition;
     public AudioSource punching;
     public AudioClip punch;
+    public GameObject[] enemyobj;
+    public static int enemcount;
 
     public int diedEnemies = 0;
 
@@ -20,6 +22,10 @@ public class PlayerPunch : MonoBehaviour
 
     private void Start()
     {
+        enemyobj = GameObject.FindGameObjectsWithTag("EnemyTeam");
+
+        enemcount= enemyobj.Length;
+
         animator = GetComponent<Animator>();
     }
     private void Update()
@@ -59,15 +65,7 @@ public class PlayerPunch : MonoBehaviour
             // Düşmanlara hasar ver
             enemy.GetComponent<Enemy>().TakeDamage(10);
 
-            if (enemy.GetComponent<Enemy>().health <= 0)
-            {
-                diedEnemies++;
-            }
-
-            if (diedEnemies == 2)
-            {
-                WinningPanel.SetActive(true);
-            }
+           
         }
     }
 
@@ -76,5 +74,13 @@ public class PlayerPunch : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(punchPosition.transform.position, punchRange);
+    }
+    public void FixedUpdate()
+    {
+        if (enemcount == 0) 
+        {
+            WinningPanel.SetActive(true);
+            
+        }
     }
 }

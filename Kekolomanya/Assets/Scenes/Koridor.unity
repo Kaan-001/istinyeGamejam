@@ -274,7 +274,7 @@ MonoBehaviour:
   - Naber,Pelinsu?
   - "Sevgilim var benim. Sala\u011Fhhk..."
   npcSprite: {fileID: 21300000, guid: 6ec8ce9fd25a164428040e6a900bca3a, type: 3}
-  Player: {fileID: 21300000, guid: 0c80c7b0093c1cb4d80a2948534d5e02, type: 3}
+  Player: {fileID: 21300000, guid: 88a47c27bbe908f498a66d4228a8b34f, type: 3}
   SpeechNumber: 0
   yoldas: 0
 --- !u!1 &276173249
@@ -672,8 +672,8 @@ MonoBehaviour:
   NpcSpeech:
   - "Kanka Benim jiletle  okul cikisi mevzu var bana kat\u0131l\u0131r m\u0131s\u0131n."
   - Arkan saglam senle olume kadar.
-  npcSprite: {fileID: 21300000, guid: a596c332bfbf26f42a3fe7b5a68b315b, type: 3}
-  Player: {fileID: 21300000, guid: 0c80c7b0093c1cb4d80a2948534d5e02, type: 3}
+  npcSprite: {fileID: 21300000, guid: 149ce7479b5afbe4ba8e3f2c5085dae9, type: 3}
+  Player: {fileID: 21300000, guid: 88a47c27bbe908f498a66d4228a8b34f, type: 3}
   SpeechNumber: 0
   yoldas: 1
 --- !u!61 &478868734
@@ -1113,8 +1113,8 @@ MonoBehaviour:
   NpcSpeech:
   - Muhammedmevzu var. Cikista Adam lazim. Gelsene.
   - "Karde\u015Fime her zaman tam destek."
-  npcSprite: {fileID: 21300000, guid: a596c332bfbf26f42a3fe7b5a68b315b, type: 3}
-  Player: {fileID: 21300000, guid: 0c80c7b0093c1cb4d80a2948534d5e02, type: 3}
+  npcSprite: {fileID: 21300000, guid: 7d1b904c85ed5a4499ac22c7110731b2, type: 3}
+  Player: {fileID: 21300000, guid: 88a47c27bbe908f498a66d4228a8b34f, type: 3}
   SpeechNumber: 0
   yoldas: 1
 --- !u!61 &1031148517

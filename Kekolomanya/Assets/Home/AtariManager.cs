@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class AtariManager : MonoBehaviour
 {
+    public static int newEra;
     // Start is called before the first frame update
     public Image Gemi;
     public Image[] enemy;
@@ -15,13 +17,28 @@ public class AtariManager : MonoBehaviour
     public RectTransform spawnPoint;
     public RectTransform rectTransform; // UI elemanýnýn RectTransform bileþeni
     public GameObject Mermi;
-    
+    public Image Stick, Buttonx;
+    public Sprite Sag, sol, Orta,push,Nopush;
+    IEnumerator coroutin() 
+    {
+        Buttonx.sprite = push;
+        yield return new WaitForSeconds(2f);
+        Buttonx.sprite = Nopush;
+    }
     
     void Update()
     {
+        if (newEra == 6) 
+        {
+            HaritaArea.Leveller = new bool[4];
+            HaritaArea.Leveller[0] = true;
+            SceneManager.LoadScene("HaritaSahne");
+
+        }
         Movement();
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            StartCoroutine(coroutin());
             // Instantiate the bullet
             GameObject bullet = Instantiate(Mermi, spawnPoint.position, Quaternion.identity);
 
@@ -36,6 +53,7 @@ public class AtariManager : MonoBehaviour
         }
 
     }
+    
     void Movement() 
     {
         // Kullanýcýdan yatay giriþ al (A, D tuþlarý veya ok tuþlarý)
@@ -49,7 +67,18 @@ public class AtariManager : MonoBehaviour
 
         // X pozisyonunu sýnýrlandýr
         position.x = Mathf.Clamp(position.x, minX, maxX);
-
+        if (moveInput < 0)
+        {
+            Stick.sprite = sol;
+        }
+        else if (moveInput > 0)
+        {
+            Stick.sprite = Sag;
+        }
+        else 
+        {
+            Stick.sprite = Orta;
+        }
         // Yeni pozisyonu geri uygula
         rectTransform.anchoredPosition = position;
     }

@@ -36,6 +36,6 @@ public class PlayerHealth : MonoBehaviour
 
     void Die()
     {
-       if(GameOverPanel!=null) GameOverPanel.SetActive(true);  
+       if(GameOverPanel!=null) GameOverPanel.SetActive(true); Time.timeScale = 0f; 
     }
 }

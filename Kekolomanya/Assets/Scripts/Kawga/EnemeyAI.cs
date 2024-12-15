@@ -21,7 +21,7 @@ public class EnemeyAI : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         ChoosingEnemy();
-        ph.GetComponent<PlayerPunch>();
+       
     }
 
     public void ChoosingEnemy()

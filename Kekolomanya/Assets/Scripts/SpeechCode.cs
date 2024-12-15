@@ -25,6 +25,12 @@ public class SpeechCode : MonoBehaviour
         {
             case "Keko": speechmanImage.transform.DOLocalMoveX(745, 0);
                 break;
+            case "Ilkkan": 
+                speechmanImage.transform.DOLocalMoveX(745, 0);
+                break;
+            case "Turunc":
+                speechmanImage.transform.DOLocalMoveX(745, 0);
+                break;
             case "Hoca":
                 speechmanImage.transform.DOLocalMoveX(745, 0);
                 break;
