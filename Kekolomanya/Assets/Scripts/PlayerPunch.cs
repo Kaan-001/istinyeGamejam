@@ -9,6 +9,10 @@ public class PlayerPunch : MonoBehaviour
     public LayerMask enemyLayer; // Düşmanların olduğu katman
     public Animator animator; // Karakterin Animator bileşeni
     public static bool attackanim = false;
+    public int diedEnemies = 0;
+
+    public GameObject WinningPanel;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -31,6 +35,7 @@ public class PlayerPunch : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         attackanim = false;
     }
+
     void Punch()
     {
         // Animasyonu oynat
@@ -49,6 +54,15 @@ public class PlayerPunch : MonoBehaviour
         {
             // Düşmanlara hasar ver
             enemy.GetComponent<Enemy>().TakeDamage(10);
+            if(enemy.GetComponent<Enemy>().health <= 0)
+            {
+                diedEnemies++;
+            }
+
+            if(diedEnemies == 2)
+            {
+                WinningPanel.SetActive(true);
+            }
         }
     }
 
