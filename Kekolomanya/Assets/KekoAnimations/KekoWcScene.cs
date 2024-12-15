@@ -31,22 +31,20 @@ public class KekoWcScene : MonoBehaviour
         this.gameObject.GetComponent<Animator>().Play("Walk");
         yield return new WaitForSeconds(4.5f);
         this.gameObject.GetComponent<Animator>().Play("IdleKeko");
-        string speechMan = "La TIRREK sen benim biricik Pelinsuyucuguma ne hakla. Ne c�rretle yan g�zle bakars�n heaggg!?";
+        string speechMan = "La TIRREK sen benim biricik Pelinsuyucuguma Ne curretle yan gozle bakarsin heaggg!?";
         char[] stringsx = speechMan.ToCharArray();
         StartCoroutine(SpeechCode.SpeechMan.SpeechRoutine(speechMan,Keko));
       
 
 
         yield return new WaitForSeconds(stringsx.Length * 0.05f+2.5f);
-        speechMan = "Muhammed abi vallaha ben birsey yapmadim.";
+        speechMan = "Jilet abi vallaha ben birsey yapmadim.";
         stringsx = null;
         stringsx = speechMan.ToCharArray();
         StartCoroutine(SpeechCode.SpeechMan.SpeechRoutine(speechMan,Player));
 
-
-
         yield return new WaitForSeconds(stringsx.Length * 0.05f +2.5f);
-        speechMan = "Kes lan Dingil!? Gel lan Buraya 50 kuru�unu yedi�im Murrooo!?!!";
+        speechMan = "Kes lan Dingil!? Gel lan Buraya simdi sen görürsün";
         stringsx = null;
         stringsx = speechMan.ToCharArray();
         StartCoroutine(SpeechCode.SpeechMan.SpeechRoutine(speechMan,Keko));
@@ -93,9 +91,4 @@ public class KekoWcScene : MonoBehaviour
 
     }
    
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
