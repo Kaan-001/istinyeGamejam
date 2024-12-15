@@ -9,6 +9,8 @@ public class PlayerPunch : MonoBehaviour
     public LayerMask enemyLayer; // Düşmanların olduğu katman
     public Animator animator; // Karakterin Animator bileşeni
     public static bool attackanim = false;
+    public AudioSource punching;
+    public AudioClip punch;
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -25,7 +27,7 @@ public class PlayerPunch : MonoBehaviour
     public IEnumerator Anim()
     {
         attackanim = true;
-
+        punching.PlayOneShot(punch);
         //Yumruk sesi
 
         yield return new WaitForSeconds(0.5f);

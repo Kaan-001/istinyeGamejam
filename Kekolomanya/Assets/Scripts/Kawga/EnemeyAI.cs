@@ -11,7 +11,8 @@ public class EnemeyAI : MonoBehaviour
     private Transform closestTarget; // En yakın hedef
     public GameObject GizmodPos;
     public float attackRange = 0.5f; // Saldırı menzili
-
+    public AudioSource punching;
+    public AudioClip punch;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -130,6 +131,7 @@ public class EnemeyAI : MonoBehaviour
     {
         Punch();
         animator.Play("Attack");
+        punching.PlayOneShot(punch);
         yield return new WaitForSeconds(0.5f); // Yumruk animasyon süresi kadar bekle
         animator.Play("Idle");
         ChoosingEnemyRandomly();
