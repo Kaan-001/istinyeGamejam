@@ -13,10 +13,15 @@ public class EnemeyAI : MonoBehaviour
     public float attackRange = 0.5f; // Saldırı menzili
     public AudioSource punching;
     public AudioClip punch;
+    public string Tag = "";
+
+    PlayerPunch ph;
+
     void Start()
     {
         animator = GetComponent<Animator>();
         ChoosingEnemy();
+        ph.GetComponent<PlayerPunch>();
     }
 
     public void ChoosingEnemy()
@@ -26,7 +31,7 @@ public class EnemeyAI : MonoBehaviour
 
         targetList = new List<Transform>();
         
-        GameObject[] targets = GameObject.FindGameObjectsWithTag("PlayerTeam");
+        GameObject[] targets = GameObject.FindGameObjectsWithTag(Tag);
 
         foreach (GameObject target in targets)
         {
@@ -45,7 +50,7 @@ public class EnemeyAI : MonoBehaviour
     {
         // Hedef listesini oluştur ve PlayerTeam tag'ine sahip nesneleri ekle
         targetList = new List<Transform>();
-        GameObject[] targets = GameObject.FindGameObjectsWithTag("PlayerTeam");
+        GameObject[] targets = GameObject.FindGameObjectsWithTag(Tag);
 
         foreach (GameObject target in targets)
         {
@@ -113,7 +118,6 @@ public class EnemeyAI : MonoBehaviour
             // Hedefe ulaştıysan döngüden çık
             if (Vector2.Distance(transform.position, closestTarget.position) < 1f)
             {
-                Debug.Log("Hedefe ulaşıldı!");
                 AttackToEnemy();
                 break;
             }
@@ -147,12 +151,18 @@ public class EnemeyAI : MonoBehaviour
             
             if (enemy.GetComponent<Enemy>()) 
             {
-                enemy.GetComponent<Enemy>().TakeDamage(10);
-            
+                enemy.GetComponent<Enemy>().TakeDamage(1);
+
+                ph.diedEnemies++;
+
+                if(ph.diedEnemies == 2)
+                {
+                    ph.WinningPanel.SetActive(true);
+                }
             }
             else 
             {
-            enemy.GetComponent<PlayerHealth>().TakeDamage(10);
+            enemy.GetComponent<PlayerHealth>().TakeDamage(4);
             }
             
         }

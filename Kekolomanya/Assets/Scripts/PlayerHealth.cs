@@ -26,7 +26,7 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        Debug.Log("Canın gitti dostum :  " + currentHealth);
+        Debug.Log("Playerın Canı :  " + currentHealth);
 
         if (currentHealth <= 0)
         {

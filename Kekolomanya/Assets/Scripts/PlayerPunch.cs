@@ -9,7 +9,7 @@ public class PlayerPunch : MonoBehaviour
     public LayerMask enemyLayer; // Düşmanların olduğu katman
     public Animator animator; // Karakterin Animator bileşeni
     public static bool attackanim = false;
-
+    public GameObject punchPosition;
     public AudioSource punching;
     public AudioClip punch;
 
@@ -51,20 +51,20 @@ public class PlayerPunch : MonoBehaviour
 
         // Yumruğun isabet ettiği hedefleri kontrol et
         StartCoroutine(Anim());
-        Vector2 punchPosition = transform.position + transform.right * 1f;
 
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(punchPosition, punchRange, enemyLayer);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(punchPosition.transform.position, punchRange, enemyLayer);
 
         foreach (Collider2D enemy in hitEnemies)
         {
             // Düşmanlara hasar ver
             enemy.GetComponent<Enemy>().TakeDamage(10);
-            if(enemy.GetComponent<Enemy>().health <= 0)
+
+            if (enemy.GetComponent<Enemy>().health <= 0)
             {
                 diedEnemies++;
             }
 
-            if(diedEnemies == 2)
+            if (diedEnemies == 2)
             {
                 WinningPanel.SetActive(true);
             }
@@ -74,8 +74,7 @@ public class PlayerPunch : MonoBehaviour
     // Yumruğun menzilini görsel olarak göstermek için
     private void OnDrawGizmosSelected()
     {
-        Vector2 punchPosition = transform.position + transform.right * 1f;
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(punchPosition, punchRange);
+        Gizmos.DrawWireSphere(punchPosition.transform.position, punchRange);
     }
 }
