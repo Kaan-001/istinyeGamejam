@@ -7,8 +7,6 @@ public class MenuManager : MonoBehaviour
     public string gameScene;
     public string menuScene;
     public string PlayAgainScene;
-    public Enemy enemy;
-    public GameObject Door;
 
     void Start()
     {
