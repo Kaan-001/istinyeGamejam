@@ -725,6 +725,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   animator: {fileID: 0}
+  punchPosition: {fileID: 0}
   punching: {fileID: 614842995}
   punch: {fileID: 8300000, guid: ac3f570fee9d3b14ab58035adb7ee3d1, type: 3}
   diedEnemies: 0
@@ -1369,6 +1370,7 @@ GameObject:
   - component: {fileID: 1205262135}
   - component: {fileID: 1205262137}
   - component: {fileID: 1205262138}
+  - component: {fileID: 1205262139}
   m_Layer: 0
   m_Name: State-Driven Camera
   m_TagString: Untagged
@@ -1479,6 +1481,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+--- !u!114 &1205262139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1205262134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97302312cfd54cc4bbd1609d20b872e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeAmount: 0.1
+  shakeDuration: 0.2
 --- !u!1 &1346872344
 GameObject:
   m_ObjectHideFlags: 0
@@ -2935,6 +2951,7 @@ MonoBehaviour:
   attackRange: 0.5
   punching: {fileID: 6307135104724899196}
   punch: {fileID: 8300000, guid: ac3f570fee9d3b14ab58035adb7ee3d1, type: 3}
+  Tag: 
 --- !u!61 &6307135104724899194
 BoxCollider2D:
   m_ObjectHideFlags: 0
