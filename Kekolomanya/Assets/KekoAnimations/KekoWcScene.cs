@@ -24,19 +24,19 @@ public class KekoWcScene : MonoBehaviour
 
     public IEnumerator SpeechKeko() 
     {
-        // kullandýðýn stringdeki char baþýna 0.05 saniye tutup buna 1 saniye ekleyerek 
+        // kullandï¿½ï¿½ï¿½n stringdeki char baï¿½ï¿½na 0.05 saniye tutup buna 1 saniye ekleyerek 
 
         this.gameObject.GetComponent<Animator>().Play("WalkKeko");
         yield return new WaitForSeconds(4.5f);
         this.gameObject.GetComponent<Animator>().Play("IdleKeko");
-        string speechMan = "La TIRREK sen benim biricik Pelinsucuðuma hangi cürretle yan gözle bakarsýn Lan .";
+        string speechMan = "La TIRREK sen benim biricik Pelinsuyucuguma ne hakla. Ne cï¿½rretle yan gï¿½zle bakarsï¿½n heaggg!?";
         char[] stringsx = speechMan.ToCharArray();
         StartCoroutine(SpeechCode.SpeechMan.SpeechRoutine(speechMan,Keko));
       
 
 
         yield return new WaitForSeconds(stringsx.Length * 0.05f+2.5f);
-        speechMan = "Jilet abi vallaha ben bir Sey yapmadim.";
+        speechMan = "Muhammed abi vallaha ben birsey yapmadim.";
         stringsx = null;
         stringsx = speechMan.ToCharArray();
         StartCoroutine(SpeechCode.SpeechMan.SpeechRoutine(speechMan,Player));
@@ -44,7 +44,7 @@ public class KekoWcScene : MonoBehaviour
 
 
         yield return new WaitForSeconds(stringsx.Length * 0.05f +2.5f);
-        speechMan = "Kes lan Dingil!? Gel lan Buraya 50 kuruþunu yediðim Murrooo!?!!";
+        speechMan = "Kes lan Dingil!? Gel lan Buraya 50 kuruï¿½unu yediï¿½im Murrooo!?!!";
         stringsx = null;
         stringsx = speechMan.ToCharArray();
         StartCoroutine(SpeechCode.SpeechMan.SpeechRoutine(speechMan,Keko));
@@ -56,26 +56,17 @@ public class KekoWcScene : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        //Hocanin girdiði kýsým sonra Ýfle kontrol edilir
+        //Hocanin girdiï¿½i kï¿½sï¿½m sonra ï¿½fle kontrol edilir
         // while(PlayerHealth){}
         
-        speechMan = "Oglum Hadi Problem çýkarmayýn! Doðru Derslere.";
+        speechMan = "Oglum Hadi Problem ï¿½ï¿½karmayï¿½n! Doï¿½ru Derslere.";
         
         StartCoroutine(SpeechCode.SpeechMan.SpeechRoutine(speechMan, Hoca));
-        yield return new WaitForSeconds(stringsx.Length * 0.05f + 2.5f);
-
-        
-        speechMan = "Jilet abi vallaha ben bir Sey yapmadim.";
-        stringsx = null;
-        stringsx = speechMan.ToCharArray();
-        StartCoroutine(SpeechCode.SpeechMan.SpeechRoutine(speechMan, Keko));
-
-        yield return new WaitForSeconds(stringsx.Length * 0.05f + 3f);
-
+        yield return new WaitForSeconds(stringsx.Length * 0.05f + 4);
         if (GlobalVolume.profile.TryGet<Vignette>(out Vignette vignette))
         {
-            // Burada Vignette'e eriþilmiþ olur. Þimdi intensity'yi deðiþtirebilirsiniz.
-            DOTween.To(() => vignette.intensity.value, x => vignette.intensity.Override(x), 1f, 1f); // Örneðin intensity'yi 0.5 olarak ayarla
+            // Burada Vignette'e eriï¿½ilmiï¿½ olur. ï¿½imdi intensity'yi deï¿½iï¿½tirebilirsiniz.
+            DOTween.To(() => vignette.intensity.value, x => vignette.intensity.Override(x), 1f, 1f); // ï¿½rneï¿½in intensity'yi 0.5 olarak ayarla
         }
 
         HaritaArea.Leveller = new bool[4];

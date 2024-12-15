@@ -55,6 +55,16 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.Play("Idle");
         }
+        if (Input.GetMouseButtonDown(0))
+        {
+            StartCoroutine(Anim());
+        }
+    }
+
+    public IEnumerator Anim()
+    {
+        animator.Play("Attack");
+        yield return new WaitForSeconds(5f);
     }
 
     void FaceDirection(Vector2 direction)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PelinSu : MonoBehaviour
 {
-    public GameObject Ýnteractive;
+    public GameObject Interactive;
     public bool Speech = false, Once = true;
     public string[] NpcSpeech;
     public Sprite npcSprite, Player;
@@ -16,7 +16,7 @@ public class PelinSu : MonoBehaviour
         if (collision.gameObject.CompareTag("Player")) 
         {
             Speech = true;
-            Ýnteractive.SetActive(true);
+            Interactive.SetActive(true);
         }
     }
     public void Update()
@@ -34,8 +34,8 @@ public class PelinSu : MonoBehaviour
     IEnumerator Chat()
     {
         Speech = false;
-        Ýnteractive.SetActive(false);
-        //speechleri yazarsýn
+        Interactive.SetActive(false);
+        //speechleri yazarsï¿½n
         if (NpcSpeech[SpeechNumber] != null) 
         {
             char[] stringsx = NpcSpeech[SpeechNumber].ToCharArray();
@@ -55,16 +55,14 @@ public class PelinSu : MonoBehaviour
             yield return new WaitForSeconds(stringsx.Length * 0.05f + 2f);
         }
         SpeechNumber = 0;
-     
-        
-        
     }
+
     public void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             Speech = false;
-            Ýnteractive.SetActive(false);
+            Interactive.SetActive(false);
         }
     }
 }

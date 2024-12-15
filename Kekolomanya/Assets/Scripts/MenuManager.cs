@@ -6,10 +6,16 @@ public class MenuManager : MonoBehaviour
 {
     public string gameScene;
     public string menuScene;
+    public string PlayAgainScene;
 
     public void StartingGameButton()
     {
         SceneManager.LoadScene(gameScene);
+    }
+
+    public void PlayAgainButton()
+    {
+        SceneManager.LoadScene(PlayAgainScene);
     }
 
     public void BackMenuButton()

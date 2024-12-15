@@ -16,6 +16,9 @@ public class NPCFighter : MonoBehaviour
     public float moveSpeed = 3f; // Hareket hızı
     public float attackRange = 0.5f; // Saldırı menzili
 
+    public GameObject GizmodPos;
+
+
     //Min and Max Konrdinatlar
     public float minX = -7f; // Minimum x koordinatı
     public float maxX = 7f;  // Maksimum x koordinatı
@@ -231,19 +234,19 @@ public class NPCFighter : MonoBehaviour
 
     void Punch()
     {
-        Vector2 punchPosition = transform.position + transform.right * 1f;
+        Vector2 punchPosition = GizmodPos.transform.position;
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(punchPosition, attackRange, Which);
 
         foreach (Collider2D enemy in hitEnemies)
         {
             enemy.GetComponent<Character>().TakeDamage(10);
-            Debug.Log("Hasar verildi");
+            Debug.Log("Düşman birine hasar verdi !!");
         }
     }
 
     private void OnDrawGizmosSelected()
     {
-        Vector2 punchPosition = transform.position + transform.right * 1f;
+        Vector2 punchPosition = GizmodPos.transform.position;
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(punchPosition, attackRange);
     }
