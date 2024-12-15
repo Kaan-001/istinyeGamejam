@@ -13,7 +13,7 @@ public class FriendAı : MonoBehaviour
     private List<Transform> targetList;
     private Transform closestTarget; // En yakın hedef
     public GameObject GizmodPos;
-
+    private Transform RandomTargetPosition;
     void Start()
     {
         // İlk hedefi belirle
@@ -59,7 +59,7 @@ public class FriendAı : MonoBehaviour
             targetList.Add(target.transform);
         }
         // En yakın hedefi bul
-        closestTarget = GetRandomTarget();
+        RandomTargetPosition = GetRandomTarget();
 
         // Eğer en yakın hedef bulunursa, hareket fonksiyonunu çağır
         if (closestTarget != null)
